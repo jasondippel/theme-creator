@@ -1,6 +1,6 @@
 {
   "name": "theme-creator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "electron.js",
   "homepage": "./",
   "repository": "https://github.com/jasondippel/theme-creator",
