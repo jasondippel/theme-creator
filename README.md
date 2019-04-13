@@ -1,8 +1,6 @@
-# electron-react-boilerplate
+# Theme Creator
 
-This repo contains the boilerplate for an electron app that includes react, eslint, and prettier. It leverages parcel as the application bundler.
-
-This boilerplate is partially based off of the steps outlined in [this medium article](https://medium.com/@yogeshkumarr/production-ready-electron-app-using-react-and-parcel-web-bundler-74dcda63f148).
+This repo contains the beginnings of an app to create themes for use in other projects. Checkin later for more details...
 
 ## Setup
 
