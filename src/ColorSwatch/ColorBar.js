@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { isDark } from '../util'
-import { useTheme } from '../theme'
+import { useTheme, useContrastingText } from '../theme'
 
 const Bar = useTheme(styled.div`
   width: 175px;
@@ -10,7 +9,7 @@ const Bar = useTheme(styled.div`
   background-color: ${p => p.hex};
   border-radius: 2px;
 
-  ${p => isDark(p.hex) && `color: ${p.$theme.textInverse};`}
+  color: ${p => useContrastingText(p.hex)};
   font-size: 12px;
 
   display: flex;

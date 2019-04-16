@@ -4,7 +4,7 @@ import { ColorSwatch } from '../ColorSwatch'
 import { useTheme, updateTheme } from '../theme'
 
 const TextColorsVisual = ({ $theme }) => (
-  <ColorGroup title={'Text'}>
+  <ColorGroup>
     <ColorSwatch
       {...{
         hex: $theme.text,

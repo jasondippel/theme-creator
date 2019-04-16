@@ -4,7 +4,7 @@ import { ColorSwatch } from '../ColorSwatch'
 import { useTheme, updateTheme } from '../theme'
 
 const BackgroundColorsVisual = ({ $theme }) => (
-  <ColorGroup title={'Background'}>
+  <ColorGroup>
     <ColorSwatch
       {...{
         hex: $theme.background100,
