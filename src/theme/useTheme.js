@@ -1,7 +1,6 @@
 import React from 'react'
 import PubSub from 'pubsub-js'
-import { defaultTheme, VERSION } from './defaultTheme'
-import { THEME_UPDATE_EVENT } from './config'
+import { defaultTheme, VERSION, THEME_UPDATE_EVENT } from './config'
 
 const initialize = () => {
   if (!!window.$themeVersion && window.$themeVersion >= VERSION) return

@@ -1,1 +1,1 @@
-export { isHexColor, isDark } from './colorUtils'
+export { isHexColor } from './colorUtils'
