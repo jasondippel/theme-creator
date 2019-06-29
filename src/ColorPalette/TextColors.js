@@ -19,6 +19,7 @@ const TextColorsVisual = ({ $theme }) => (
         colorName: 'Text Inverse',
         description: 'default text (opposite darkness)',
         onColorChange: val => updateTheme({ key: 'textInverse', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch
@@ -27,6 +28,7 @@ const TextColorsVisual = ({ $theme }) => (
         colorName: 'Text Meta',
         description: 'placeholder, metadata',
         onColorChange: val => updateTheme({ key: 'textMeta', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch
@@ -35,6 +37,7 @@ const TextColorsVisual = ({ $theme }) => (
         colorName: 'Text Disabled',
         description: 'disabled text',
         onColorChange: val => updateTheme({ key: 'textDisabled', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch

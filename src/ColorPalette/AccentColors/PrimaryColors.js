@@ -19,6 +19,7 @@ const PrimaryColorsVisual = ({ $theme }) => (
         colorName: 'Primary Accent',
         description: 'selected',
         onColorChange: val => updateTheme({ key: 'primaryAccent', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch
@@ -27,6 +28,7 @@ const PrimaryColorsVisual = ({ $theme }) => (
         colorName: 'Primary Background',
         description: 'background',
         onColorChange: val => updateTheme({ key: 'primaryBackground', val }),
+        isDisabled: true,
       }}
     />
   </ColorGroup>
