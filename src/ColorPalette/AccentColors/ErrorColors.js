@@ -19,6 +19,7 @@ const ErrorColorsVisual = ({ $theme }) => (
         colorName: 'Error Accent',
         description: 'accent',
         onColorChange: val => updateTheme({ key: 'errorAccent', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch
@@ -27,6 +28,7 @@ const ErrorColorsVisual = ({ $theme }) => (
         colorName: 'Error Background',
         description: 'background',
         onColorChange: val => updateTheme({ key: 'errorBackground', val }),
+        isDisabled: true,
       }}
     />
   </ColorGroup>

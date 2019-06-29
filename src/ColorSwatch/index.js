@@ -20,6 +20,10 @@ const ColorInput = useTheme(styled.input`
   background-color: ${p => p.$theme.background300};
   padding: 4px;
   text-transform: uppercase;
+
+  &:disabled {
+    color: ${p => p.$theme.textDisabled};
+  }
 `)
 
 export class ColorSwatch extends React.Component {
@@ -28,6 +32,7 @@ export class ColorSwatch extends React.Component {
     hex: PropTypes.string,
     colorName: PropTypes.string,
     onColorChange: PropTypes.func,
+    isDisabled: PropTypes.bool,
   }
   static defaultProps = {
     onColorChange: NOOP,
@@ -42,7 +47,7 @@ export class ColorSwatch extends React.Component {
   }
 
   render() {
-    const { hex, colorName } = this.props
+    const { hex, colorName, isDisabled } = this.props
 
     return (
       <Root>
@@ -51,6 +56,7 @@ export class ColorSwatch extends React.Component {
           type="text"
           defaultValue={hex}
           onChange={this.onHexChange}
+          disabled={isDisabled}
         />
       </Root>
     )

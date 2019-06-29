@@ -10,6 +10,7 @@ const BackgroundColorsVisual = ({ $theme }) => (
         hex: $theme.background100,
         colorName: 'Background 100',
         onColorChange: val => updateTheme({ key: 'background100', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch
@@ -17,6 +18,7 @@ const BackgroundColorsVisual = ({ $theme }) => (
         hex: $theme.background200,
         colorName: 'Background 200',
         onColorChange: val => updateTheme({ key: 'background200', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch
@@ -31,6 +33,7 @@ const BackgroundColorsVisual = ({ $theme }) => (
         hex: $theme.background400,
         colorName: 'Background 400',
         onColorChange: val => updateTheme({ key: 'background400', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch

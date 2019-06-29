@@ -47,7 +47,11 @@ export const TabMenu = ({ tabs, activeTab, handleClick }) => (
   <Root>
     <Label>Colors:</Label>
     {tabs.map((tab, idx) => (
-      <TabButton onClick={() => handleClick(idx)} active={idx === activeTab}>
+      <TabButton
+        onClick={() => handleClick(idx)}
+        active={idx === activeTab}
+        title={tab.label}
+      >
         {tab.label}
       </TabButton>
     ))}

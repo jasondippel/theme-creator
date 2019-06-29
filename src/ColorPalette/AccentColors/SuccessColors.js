@@ -19,6 +19,7 @@ const SuccessColorsVisual = ({ $theme }) => (
         colorName: 'Success Accent',
         description: 'selected',
         onColorChange: val => updateTheme({ key: 'successAccent', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch
@@ -27,6 +28,7 @@ const SuccessColorsVisual = ({ $theme }) => (
         colorName: 'Success Background',
         description: 'background',
         onColorChange: val => updateTheme({ key: 'successBackground', val }),
+        isDisabled: true,
       }}
     />
   </ColorGroup>

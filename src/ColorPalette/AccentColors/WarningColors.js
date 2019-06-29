@@ -19,6 +19,7 @@ const WarningColorsVisual = ({ $theme }) => (
         colorName: 'Warning Accent',
         description: 'accent',
         onColorChange: val => updateTheme({ key: 'warningAccent', val }),
+        isDisabled: true,
       }}
     />
     <ColorSwatch
@@ -27,6 +28,7 @@ const WarningColorsVisual = ({ $theme }) => (
         colorName: 'Warning Background',
         description: 'background',
         onColorChange: val => updateTheme({ key: 'warningBackground', val }),
+        isDisabled: true,
       }}
     />
   </ColorGroup>
