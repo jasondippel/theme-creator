@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { ColorBar } from './ColorBar'
-import { isHexColor } from '../util'
-import { useTheme, useContrastingText } from '../theme'
+import { useTheme, useContrastingText, isHexColor } from '../theme'
 
 const NOOP = () => {}
 
@@ -38,23 +37,54 @@ export class ColorSwatch extends React.Component {
     onColorChange: NOOP,
   }
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      value: props.hex,
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { hex } = this.props
+    const { value } = this.state
+
+    if (nextProps.hex !== hex) {
+      this.setState({
+        value: nextProps.hex,
+      })
+      return true
+    }
+
+    if (nextState.value !== value) {
+      return true
+    }
+
+    return false
+  }
+
   onHexChange = e => {
     const newVal = e.target.value
 
     if (isHexColor(newVal)) {
       this.props.onColorChange(newVal)
     }
+
+    this.setState({
+      value: newVal,
+    })
   }
 
   render() {
     const { hex, colorName, isDisabled } = this.props
+    const { value } = this.state
 
     return (
       <Root>
         <ColorBar {...{ hex, colorName }} />
         <ColorInput
           type="text"
-          defaultValue={hex}
+          value={value}
           onChange={this.onHexChange}
           disabled={isDisabled}
         />

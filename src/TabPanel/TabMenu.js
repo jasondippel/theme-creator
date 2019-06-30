@@ -51,6 +51,7 @@ export const TabMenu = ({ tabs, activeTab, handleClick }) => (
         onClick={() => handleClick(idx)}
         active={idx === activeTab}
         title={tab.label}
+        key={`tab-${tab.label}`}
       >
         {tab.label}
       </TabButton>
