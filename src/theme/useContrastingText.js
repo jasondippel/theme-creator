@@ -1,4 +1,4 @@
-import { getThemeVal, isDark } from './util'
+import { getThemeVal, isDark } from './utils'
 
 export const useContrastingText = background => {
   const text = getThemeVal({ key: 'text' })

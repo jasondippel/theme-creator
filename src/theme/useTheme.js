@@ -1,19 +1,20 @@
 import React from 'react'
 import PubSub from 'pubsub-js'
-import { defaultTheme, VERSION, THEME_UPDATE_EVENT } from './config'
+import { VERSION, THEME_UPDATE_EVENT } from './config'
+import { getTheme } from './utils'
+import { generateTheme } from './generators'
 
 const initialize = () => {
   if (!!window.$themeVersion && window.$themeVersion >= VERSION) return
 
   const sendUpdate = !!window.$themeVersion
+  const theme = generateTheme(getTheme())
 
   window.$themeVersion = VERSION
-  window.$theme = defaultTheme
+  window.$theme = theme
 
   if (sendUpdate) PubSub.publish(THEME_UPDATE_EVENT)
 }
-
-const getTheme = () => window.$theme
 
 export const useTheme = Comp =>
   class extends React.Component {

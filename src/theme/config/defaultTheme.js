@@ -5,9 +5,9 @@ export const defaultTheme = {
    ** TEXT **
    **********/
   text: '#2f3638',
-  textInverse: '#ffffff',
-  textMeta: '#5D6366',
-  textDisabled: '#959A9C',
+  // textInverse: '#F5FAFC',
+  // textMeta: '#5D6366',
+  // textDisabled: '#959A9C',
   link: '#0078A4',
 
   /****************
