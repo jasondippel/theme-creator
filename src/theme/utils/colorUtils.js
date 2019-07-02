@@ -1,9 +1,8 @@
 /**
  * Determine if value is valid hex color code
- * @param val A hex value (ex #fff, #ffffff)
  **/
 export const isHexColor = val => {
-  if (val[0] !== '#') return false
+  if (!val || val[0] !== '#') return false
   val = val.substr(1)
   return (
     typeof val === 'string' &&
@@ -12,7 +11,16 @@ export const isHexColor = val => {
   )
 }
 
+/**
+ * Returns properly formatted 6 digit hex color starting with a `#`
+ **/
 const formatHexColor = hex => {
+  if (!isHexColor(hex)) {
+    // eslint-disable-next-line no-console
+    console.error('formatHexColor called with non-hex value')
+    return false
+  }
+
   if (hex[0] === '#') hex = hex.substr(1) // remove starting '#'
   if (hex.length === 3) {
     hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`
@@ -63,9 +71,103 @@ export const rgbToHex = (r, g, b) => {
   return `#${rHex}${gHex}${bHex}`
 }
 
-/*
- * Ensures RGB values are within acceptable range (0 --> 255)
- */
+/**
+ * Given an RGB color (as 3 distinct values), returns an array of corresponding
+ * HSL values
+ *
+ * Source: https://stackoverflow.com/questions/3732046/how-do-you-get-the-hue-of-a-xxxxxx-colour
+ **/
+export const rgbToHsl = (r, g, b) => {
+  r /= 255
+  g /= 255
+  b /= 255
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  let h,
+    s,
+    l = (max + min) / 2
+
+  if (max === min) {
+    h = s = 0 // achromatic
+  } else {
+    const d = max - min
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0)
+        break
+      case g:
+        h = (b - r) / d + 2
+        break
+      case b:
+        h = (r - g) / d + 4
+        break
+    }
+    h /= 6
+  }
+
+  h = h * 360
+  s = s * 100
+  l = l * 100
+
+  return [h, s, l]
+}
+
+/**
+ * part of transforming hsl to rgb
+ *
+ * Source: https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+ **/
+const hue2rgb = (p, q, t) => {
+  if (t < 0) t += 1
+  if (t > 1) t -= 1
+  if (t < 1 / 6) return p + (q - p) * 6 * t
+  if (t < 1 / 2) return q
+  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
+  return p
+}
+
+/**
+ * Given the separated values of an HSL defined color, returns an array of
+ * corresponding RGB values
+ *
+ * Source: https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+ **/
+export const hslToRgb = (h, s, l) => {
+  h /= 360
+  s /= 100
+  l /= 100
+
+  let r, g, b
+
+  if (s === 0) {
+    r = g = b = l // achromatic
+  } else {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s
+    const p = 2 * l - q
+    r = hue2rgb(p, q, h + 1 / 3)
+    g = hue2rgb(p, q, h)
+    b = hue2rgb(p, q, h - 1 / 3)
+  }
+
+  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)]
+}
+
+/**
+ * Given a hex value, returns an array of HSL values
+ **/
+export const hexToHsl = hex => rgbToHsl(...hexToRgb(hex))
+
+/**
+ * Given the separated values of an HSL defined color, returns the HEX color
+ * code
+ **/
+export const hslToHex = (h, s, l) => rgbToHex(...hslToRgb(h, s, l))
+
+/**
+ * Ensures RGB values are within acceptable range (0 --> 255); Use when
+ * manipultating RGB values and want to ensure it results in a valid RGB color
+ **/
 export const constrainRgb = (r, g, b) => {
   r = r > 255 ? 255 : r
   r = r < 0 ? 0 : r
@@ -80,12 +182,9 @@ export const constrainRgb = (r, g, b) => {
 }
 
 /**
- * Returns true if the given color is dark
- * @param hex hex string representation of the color (ex #e34510 or #f37)
- * @Returns true/false if the color is dark
+ * Returns true if the given color is dark, false if not
  **/
 export const isDark = hex => {
-  if (!hex) return false
   if (!isHexColor(hex)) {
     // eslint-disable-next-line no-console
     console.error('isDark called with non-hex value')
@@ -99,5 +198,5 @@ export const isDark = hex => {
     0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b),
   )
 
-  return brightness > 127.5 ? false : true
+  return brightness <= 127.5
 }
